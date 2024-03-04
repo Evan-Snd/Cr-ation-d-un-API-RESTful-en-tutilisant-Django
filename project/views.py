@@ -5,7 +5,7 @@ from rest_framework import status, generics, viewsets, request
 from rest_framework import permissions
 
 from .models import Projects, Contributors, Comments, Issues
-from .serializers import ProjectSerializer, ContributorSerializer, CommentSerializer, IssueSerializer
+from .serializers import ProjectSerializer, ContributorSerializer, ContributorGetSerializer, CommentSerializer, IssueSerializer
 
 
 class ProjectListView(generics.ListCreateAPIView):
@@ -56,6 +56,10 @@ class ContributorListView(generics.ListCreateAPIView):
 class ContributorViewSet(viewsets.ModelViewSet):
     queryset = Contributors.objects.all()
     serializer_class = ContributorSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return ContributorGetSerializer
 
     def get_queryset(self, *args, **kwargs):
         project_id = self.kwargs.get("projects_pk")

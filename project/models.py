@@ -30,7 +30,7 @@ class Contributors(models.Model):
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     project = models.ForeignKey(to=Projects, on_delete=models.CASCADE)
     permission = models.CharField(max_length=20)
-    role = models.CharField(max_length=128,default='Dev', blank=True, choices=ROLE)
+    role = models.CharField(max_length=128, default='Dev', blank=True, choices=ROLE)
 
     def __str__(self):
         return "{} à contribuer au projet : {}".format(self.user, self.project)

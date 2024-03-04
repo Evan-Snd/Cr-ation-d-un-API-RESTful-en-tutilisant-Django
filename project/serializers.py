@@ -23,6 +23,12 @@ class ContributorSerializer(serializers.ModelSerializer):
         extra_kwargs = {'project': {'read_only': True}}
 
 
+class ContributorGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contributors
+        fields = ['user', 'project', 'permission', 'role']
+
+
 
 class IssueSerializer(serializers.ModelSerializer):
     # parent_lookup_kwargs = {
